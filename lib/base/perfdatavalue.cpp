@@ -90,7 +90,7 @@ PerfdataValue::Ptr PerfdataValue::Parse(const String& perfdata)
 		counter = true;
 		unit = "";
 	} else if (unit != "") {
-		BOOST_THROW_EXCEPTION(std::invalid_argument("Invalid performance data unit: " + unit));
+		unit = "";
 	}
 
 	warn = ParseWarnCritMinMaxToken(tokens, 1, "warning");
