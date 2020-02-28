@@ -58,8 +58,6 @@ PerfdataValue::Ptr PerfdataValue::Parse(const String& perfdata)
 	if (pos != String::NPos)
 		unit = valueStr.SubStr(pos, tokens[0].GetLength() - pos);
 
-	unit = unit.ToLower();
-
 	double base = 1.0;
 
 	if (unit == "us") {
@@ -70,19 +68,19 @@ PerfdataValue::Ptr PerfdataValue::Parse(const String& perfdata)
 		unit = "seconds";
 	} else if (unit == "s") {
 		unit = "seconds";
-	} else if (unit == "tb") {
+	} else if (unit == "TB") {
 		base *= 1024.0 * 1024.0 * 1024.0 * 1024.0;
 		unit = "bytes";
-	} else if (unit == "gb") {
+	} else if (unit == "GB") {
 		base *= 1024.0 * 1024.0 * 1024.0;
 		unit = "bytes";
-	} else if (unit == "mb") {
+	} else if (unit == "MB") {
 		base *= 1024.0 * 1024.0;
 		unit = "bytes";
-	} else if (unit == "kb") {
+	} else if (unit == "KB") {
 		base *= 1024.0;
 		unit = "bytes";
-	} else if (unit == "b") {
+	} else if (unit == "B") {
 		unit = "bytes";
 	} else if (unit == "%") {
 		unit = "percent";
