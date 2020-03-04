@@ -610,7 +610,8 @@ This chapter explains how to set up Icinga Web 2.
 Either Icinga DB or the DB IDO (Database Icinga Data Output) feature for Icinga 2 takes care of
 exporting all configuration and status information into a database.
 
-Please choose whether to install Icinga DB ([MySQL](ASD)) or DB IDO ([MySQL](02-installation.md#configuring-db-ido-mysql) or
+Please choose whether to install Icinga DB ([MySQL](02-installation.md#configuring-icinga-db-mysql))
+or DB IDO ([MySQL](02-installation.md#configuring-db-ido-mysql) or
 [PostgreSQL](02-installation.md#configuring-db-ido-postgresql)). 
 It's recommended to use the newer Icinga DB feature, if you don't need PostgreSQL.
 
