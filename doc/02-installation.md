@@ -607,11 +607,52 @@ $ nano /etc/icinga2/conf.d/templates.conf
 Icinga 2 can be used with Icinga Web 2 and a variety of modules.
 This chapter explains how to set up Icinga Web 2.
 
-The DB IDO (Database Icinga Data Output) feature for Icinga 2 take care of
+Either Icinga DB or the DB IDO (Database Icinga Data Output) feature for Icinga 2 takes care of
 exporting all configuration and status information into a database.
 
-Please choose whether to install [MySQL](02-installation.md#configuring-db-ido-mysql) or
-[PostgreSQL](02-installation.md#configuring-db-ido-postgresql).
+Please choose whether to install Icinga DB ([MySQL](ASD)) or DB IDO ([MySQL](02-installation.md#configuring-db-ido-mysql) or
+[PostgreSQL](02-installation.md#configuring-db-ido-postgresql)). 
+It's recommended to use the newer Icinga DB feature, if you don't need PostgreSQL.
+
+### Configuring Icinga DB (MySQL) <a id="configuring-icinga-db-mysql"></a>
+
+[Icinga DB Installation](ASD)
+
+[Icinga DB Web Configuration](ASD)
+
+#### Enabling the Icinga DB module <a id="enabling-ido-mysql"></a>
+
+Icinga 2 provides a configuration file that is installed in
+`/etc/icinga2/features-available/icingadb.conf`. You can update
+the Redis credentials in this file.
+
+All available attributes are explained in the
+[IcingaDB object](09-object-types.md#objecttype-icingadb)
+chapter.
+
+You can enable the `icingadb` feature configuration file using
+`icinga2 feature enable`:
+
+```
+# icinga2 feature enable icingadb
+Module 'icingadb' was enabled.
+Make sure to restart Icinga 2 for these changes to take effect.
+```
+
+Restart Icinga 2.
+
+```
+systemctl restart icinga2
+```
+
+Alpine Linux:
+
+```
+rc-service icinga2 restart
+```
+
+Continue with the [webserver setup](02-installation.md#icinga2-user-interface-webserver).
+
 
 ### Configuring DB IDO MySQL <a id="configuring-db-ido-mysql"></a>
 
@@ -1040,7 +1081,9 @@ rc-service icinga2 restart
 Please consult the [installation documentation](https://icinga.com/docs/icingaweb2/latest/doc/02-Installation/)
 for further instructions on how to install Icinga Web 2.
 
-The Icinga 2 API can be defined as [command transport](https://icinga.com/docs/icingaweb2/latest/modules/monitoring/doc/05-Command-Transports/)
+Consult the [Icinga DB web documentation](ASD) on how to connect Icinga Web 2 with Icinga DB.
+
+The Icinga 2 API can be defined as [command transport](ASD)
 in Icinga Web 2 >= 2.4.
 
 ## Addons <a id="install-addons"></a>
