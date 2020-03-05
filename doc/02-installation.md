@@ -610,18 +610,16 @@ This chapter explains how to set up Icinga Web 2.
 Either Icinga DB or the DB IDO (Database Icinga Data Output) feature for Icinga 2 takes care of
 exporting all configuration and status information into a database.
 
-Please choose whether to install Icinga DB ([MySQL](02-installation.md#configuring-icinga-db-mysql))
+Please choose whether to install [Icinga DB](02-installation.md#configuring-icinga-db) (MySQL only)
 or DB IDO ([MySQL](02-installation.md#configuring-db-ido-mysql) or
 [PostgreSQL](02-installation.md#configuring-db-ido-postgresql)). 
 It's recommended to use the newer Icinga DB feature, if you don't need PostgreSQL.
 
-### Configuring Icinga DB (MySQL) <a id="configuring-icinga-db-mysql"></a>
+### Configuring Icinga DB <a id="configuring-icinga-db"></a>
 
-[Icinga DB Installation](ASD)
+First, make sure to setup Icinga DB itself and its database backends (Redis and MySQL) by following the [installation instructions](ASD).
 
-[Icinga DB Web Configuration](ASD)
-
-#### Enabling the Icinga DB module <a id="enabling-ido-mysql"></a>
+#### Enabling the Icinga DB feature <a id="enabling-icinga-db"></a>
 
 Icinga 2 provides a configuration file that is installed in
 `/etc/icinga2/features-available/icingadb.conf`. You can update
@@ -653,7 +651,6 @@ rc-service icinga2 restart
 ```
 
 Continue with the [webserver setup](02-installation.md#icinga2-user-interface-webserver).
-
 
 ### Configuring DB IDO MySQL <a id="configuring-db-ido-mysql"></a>
 
@@ -1082,7 +1079,7 @@ rc-service icinga2 restart
 Please consult the [installation documentation](https://icinga.com/docs/icingaweb2/latest/doc/02-Installation/)
 for further instructions on how to install Icinga Web 2.
 
-Consult the [Icinga DB web documentation](ASD) on how to connect Icinga Web 2 with Icinga DB.
+Consult the [Icinga DB Web documentation](ASD) on how to connect Icinga Web 2 with Icinga DB.
 
 The Icinga 2 API can be defined as [command transport](ASD)
 in Icinga Web 2 >= 2.4.
