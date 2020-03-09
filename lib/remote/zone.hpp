@@ -26,6 +26,9 @@ public:
 	std::vector<Zone::Ptr> GetAllParentsRaw() const;
 	Array::Ptr GetAllParents() const override;
 
+	void AddEndpoint(const Endpoint::Ptr& endpoint);
+	void RemoveEndpoint(const Endpoint::Ptr& endpoint);
+
 	bool CanAccessObject(const ConfigObject::Ptr& object);
 	bool IsChildOf(const Zone::Ptr& zone);
 	bool IsGlobal() const;
