@@ -22,6 +22,7 @@ void Endpoint::OnAllConfigLoaded()
 	ObjectImpl<Endpoint>::OnAllConfigLoaded();
 
 	String zoneName = GetZoneName();
+
 	if (zoneName != "") {
 		Zone::Ptr zone = Zone::GetByName(zoneName);
 		if (!zone) {
@@ -66,11 +67,8 @@ void Endpoint::Stop(bool runtimeRemoved)
 
 void Endpoint::SetCachedZone(const Zone::Ptr& zone)
 {
-	if (m_Zone)
-		BOOST_THROW_EXCEPTION(ScriptError("Endpoint '" + GetName()
-			+ "' is in more than one zone.", GetDebugInfo()));
-
-	m_Zone = zone;
+	if (!m_Zone)
+		m_Zone = zone;
 }
 
 void Endpoint::AddClient(const JsonRpcConnection::Ptr& client)
