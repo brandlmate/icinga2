@@ -409,8 +409,7 @@ void DbConnection::UpdateObject(const ConfigObject::Ptr& object)
 		bool active = object->IsActive();
 
 		if (active) {
-			if (!dbActive)
-				ActivateObject(dbobj);
+			ActivateObject(dbobj);
 
 			Dictionary::Ptr configFields = dbobj->GetConfigFields();
 			String configHash = dbobj->CalculateConfigHash(configFields);

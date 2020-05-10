@@ -115,6 +115,7 @@ public:
 
 	double GetTlsHandshakeTimeout() const override;
 	void SetTlsHandshakeTimeout(double value, bool suppress_events, const Value& cookie) override;
+	void AddConnection(const Endpoint::Ptr& endpoint);
 
 protected:
 	void OnConfigLoaded() override;
@@ -150,7 +151,6 @@ private:
 	void CheckApiPackageIntegrity();
 
 	bool AddListener(const String& node, const String& service);
-	void AddConnection(const Endpoint::Ptr& endpoint);
 
 	void NewClientHandler(
 		boost::asio::yield_context yc, const Shared<boost::asio::io_context::strand>::Ptr& strand,

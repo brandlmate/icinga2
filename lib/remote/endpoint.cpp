@@ -44,12 +44,12 @@ void Endpoint::OnAllConfigLoaded()
 
 		// XXX: If/When AddConnection() becomes public
 		// Attempt to connect to endpoint.
-		//Zone::Ptr local = Zone::GetLocalZone();
-		//if (parent == local) {
-		//	ApiListener::Ptr listener = ApiListener::GetInstance();
-		//	if (listener)
-		//		listener->AddConnection(this);
-		//}
+		Zone::Ptr local = Zone::GetLocalZone();
+		if (parent == local) {
+			ApiListener::Ptr listener = ApiListener::GetInstance();
+			if (listener)
+				listener->AddConnection(this);
+		}
 	}
 
 	if (!m_Zone)
@@ -60,6 +60,10 @@ void Endpoint::OnAllConfigLoaded()
 void Endpoint::Stop(bool runtimeRemoved)
 {
 	ObjectImpl<Endpoint>::Stop(runtimeRemoved);
+
+	for (const JsonRpcConnection::Ptr& client : this->GetClients()) {
+		client->Disconnect();
+	}
 
 	if (m_Zone)
 		m_Zone->RemoveEndpoint(this);
