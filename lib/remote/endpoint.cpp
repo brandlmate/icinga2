@@ -47,9 +47,17 @@ void Endpoint::OnAllConfigLoaded()
 		Zone::Ptr local = Zone::GetLocalZone();
 		if (parent == local) {
 			ApiListener::Ptr listener = ApiListener::GetInstance();
-			if (listener)
+			if (listener) {
+				for (const JsonRpcConnection::Ptr& aclient : listener->GetAnonymousClients()) {
+					if (aclient->GetIdentity() == GetName()) {
+						aclient->Disconnect();
+					}
+				}
 				listener->AddConnection(this);
+			}
+
 		}
+
 	}
 
 	if (!m_Zone)
@@ -60,6 +68,9 @@ void Endpoint::OnAllConfigLoaded()
 void Endpoint::Stop(bool runtimeRemoved)
 {
 	ObjectImpl<Endpoint>::Stop(runtimeRemoved);
+
+	Log(LogWarning, "ApiListener")
+			<< "---------------------------------- Stop. Removing API client for endpoint '" << GetName() << "'.";
 
 	for (const JsonRpcConnection::Ptr& client : this->GetClients()) {
 		client->Disconnect();
@@ -100,8 +111,9 @@ void Endpoint::RemoveClient(const JsonRpcConnection::Ptr& client)
 		boost::mutex::scoped_lock lock(m_ClientsLock);
 		m_Clients.erase(client);
 
+
 		Log(LogWarning, "ApiListener")
-			<< "Removing API client for endpoint '" << GetName() << "'. " << m_Clients.size() << " API clients left.";
+			<< "---------------------------------- RemoveClient. Removing API client for endpoint '" << GetName() << "'. " << m_Clients.size() << " API clients left.";
 
 		SetConnecting(false);
 	}
